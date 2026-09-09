@@ -2,7 +2,7 @@
 
 Fünf Themen geben die Richtung vor. Sie sind ein Angebot, keine Vorgabe: eine Quest wählen, mehrere kombinieren oder etwas Eigenes mitbringen — alles zulässig. LLM-Unterstützung ist überall erlaubt, Token-Kontingente stehen bereit.
 
-![Hack the planet](gifs/hack-the-planet-floppy-disks.gif)
+![Floppy Disks](gifs/hack-the-planet-floppy-disks.gif)
 
 ## Linked Open Data
 

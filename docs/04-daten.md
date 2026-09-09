@@ -1,5 +1,7 @@
 # 04 · Daten & APIs
 
+![Cereal Killer](gifs/cereal-killer.gif)
+
 ## Kulturpool API
 
 **[api.kulturpool.at/reference](https://api.kulturpool.at/reference/)**

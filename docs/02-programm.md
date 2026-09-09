@@ -2,6 +2,8 @@
 
 Eine Uhr, zwei Tage. Die Zeiten sind der Rahmen — gearbeitet wird dazwischen.
 
+![Hack the planet](gifs/hack-the-planet-dade-murphy.gif)
+
 |  | **Di 27. Oktober** | **Mi 28. Oktober** |
 |---:|---|---|
 | **09:00** | Welcome | Arbeitsphase |
