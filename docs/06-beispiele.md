@@ -2,7 +2,7 @@
 
 Notebooks, Snippets, Prototypen, Sackgassen mit Lerneffekt. Was hier landet, spart den nächsten Teams eine Stunde.
 
-![Password](https://media1.tenor.com/m/Ju7EDIEsNlEAAAAC/hugh-jackman-password.gif)
+![Password](gifs/swordfish-password.gif)
 
 ## Aus dem Vorjahr
 

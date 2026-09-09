@@ -4,7 +4,7 @@
 
 Ein Hackathon von [Kulturpool](https://kulturpool.at) und dem [ACDH-CH](https://www.oeaw.ac.at/acdh/), gefördert von CLARIAH-AT. Zwei Tage lang treffen österreichische Kulturdaten auf offene Wissensgraphen — Schwerpunkte: **Linked Open Data** und **Ähnlichkeitssuche**.
 
-![Hack the planet](https://media1.tenor.com/m/V7fGn26bUKsAAAAC/hackers-jonny-lee-miller.gif)
+![Crash Override](docs/gifs/hackers-crash-override.gif)
 
 Dieses Repo ist die Werkbank zur Veranstaltung: ein dünnes Gerüst an Infos plus die Sammelstelle für Queries, Beispiele und alles, was während des Hackathons entsteht.
 

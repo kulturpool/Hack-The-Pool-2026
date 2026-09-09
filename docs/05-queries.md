@@ -2,7 +2,7 @@
 
 Sammelstelle für alles Abfragbare: SPARQL, API-Calls, Filterausdrücke, Tricks. Unten stehen die Starter — der Rest kommt von uns allen.
 
-![Swordfish](https://media1.tenor.com/m/bucDVKCoIKAAAAAC/swordfish-hack.gif)
+![Swordfish](gifs/swordfish-hack.gif)
 
 ## SPARQL
 
