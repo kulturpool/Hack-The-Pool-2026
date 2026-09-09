@@ -2,7 +2,7 @@
 
 Notebooks, Snippets, Prototypen, Sackgassen mit Lerneffekt. Was hier landet, spart den nächsten Teams eine Stunde.
 
-![Password](gifs/swordfish-password.gif)
+![Files](gifs/hackers-files.gif)
 
 ## Aus dem Vorjahr
 
@@ -27,8 +27,6 @@ Team-Ergebnisse werden nach dem Slam hier verlinkt — eigenes Repo oder Unteror
 ## Beitragen
 
 Kleines pro Pull Request: Zeile in die Tabelle, Code in einen Unterordner mit sprechendem Namen und einer kurzen `README.md` (Was, Voraussetzungen, wie starten). Für Notebooks bitte die Outputs drinlassen — dann ist auch ohne Ausführen sichtbar, was rauskommt.
-
-Keine Keys, keine Tokens, keine Zugangsdaten. Große Datenmengen nicht committen, sondern über die [Dumps](04-daten.md#dumps) beziehen.
 
 ---
 

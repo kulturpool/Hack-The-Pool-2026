@@ -7,4 +7,4 @@ Lokale Kopien, damit die Doku ohne externe Abhängigkeit rendert. Leicht optimie
 | `hackers-crash-override.gif` | [Tenor](https://tenor.com/de/view/hackers-jonny-lee-miller-crash-override-gif-26342973) — *Hackers* (1995) |
 | `hack-the-planet-floppy-disks.gif` | [Tenor](https://tenor.com/de/view/hackers-floppy-disks-quick-draw-hack-the-planet-hackers-movie-gif-26760814) — *Hackers* (1995) |
 | `swordfish-hack.gif` | [Tenor](https://tenor.com/de/view/swordfish-hack-hacker-funny-gif-19079280) — *Swordfish* (2001) |
-| `swordfish-password.gif` | [Tenor](https://tenor.com/de/view/hugh-jackman-password-swordfish-pc-gif-2805395175884207697) — *Swordfish* (2001) |
+| `hackers-files.gif` | [Tenor](https://tenor.com/de/view/hacker-hackers-hackers-movie-angelina-jolie-files-gif-27531778) — *Hackers* (1995) |

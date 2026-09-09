@@ -1,33 +1,25 @@
 # 02 · Programm
 
-Zwei Tage, ein Slam am Ende. Die Zeiten sind der Rahmen — gearbeitet wird dazwischen.
+Eine Uhr, zwei Tage. Die Zeiten sind der Rahmen — gearbeitet wird dazwischen.
 
-## Dienstag, 27. Oktober
+|  | **Di 27. Oktober** | **Mi 28. Oktober** |
+|---:|---|---|
+| **09:00** | Welcome | Arbeitsphase |
+| **09:10** | Themen, Quests & Beispiele | ↓ |
+| **10:00** | Team- & Ideenfindung | ↓ |
+| **13:00** | Mittagessen | Mittagessen |
+| **14:00** | Arbeitsphase | Letzter Schliff |
+| **14:30** | ↓ | **Projekt-Slam** |
+| **15:00** | ↓ | Feedback-Runde |
+| **15:15** | ↓ | Preisverleihung |
+| **16:00** | ↓ | Ende |
+| **17:00** | Check-in | |
+| **18:00** | Abendessen | |
+| **22:00** | Ende Tag 1 | |
 
-| | |
-|---|---|
-| 09:00 | Welcome |
-| 09:10 | Vorstellung von Themen, Quests und Beispielen |
-| ab 10:00 | Team- und Ideenfindung, danach Arbeitsphase |
-| 13:00 | Mittagessen |
-| 14:00 | Arbeitsphase |
-| 17:00 | Check-in — Was ist unser Ziel? Was haben wir geschafft? Wo brauchen wir Hilfe? |
-| 18:00 | Abendessen |
-| 22:00 | Ende Tag 1 |
+**Check-in** am ersten Abend, drei Fragen pro Team: Was ist unser Ziel? Was haben wir geschafft? Wo brauchen wir Hilfe?
 
-## Mittwoch, 28. Oktober
-
-| | |
-|---|---|
-| 09:00 | Arbeitsphase |
-| 13:00 | Mittagessen |
-| 14:00 | Arbeitsphase, letzter Schliff |
-| 14:30 | Projekt-Slam |
-| 15:00 | Feedback-Runde |
-| 15:15 | Preisverleihung |
-| 16:00 | Ende |
-
-Danach gibt es für alle, die mögen, ein lockeres Get-together auf eigene Rechnung.
+**Projekt-Slam** am zweiten Nachmittag — kurz, laut, alle Teams. Danach Feedback und Preise; im Anschluss ein lockeres Get-together auf eigene Rechnung für alle, die mögen.
 
 ## Setting
 
@@ -35,4 +27,4 @@ Gearbeitet wird im World-Café-Setting: Tischinseln im Hauptraum, zusätzliche B
 
 ---
 
-[← Factsheet](01-factsheet.md) · [Übersicht](../README.md) · [Weiter: Quests →](03-quests.md)
+[← Location](01-location.md) · [Übersicht](../README.md) · [Weiter: Quests →](03-quests.md)

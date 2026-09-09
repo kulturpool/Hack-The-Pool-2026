@@ -18,7 +18,7 @@ Hinschauen, wo es wehtut. Welche Bestände sind lückenhaft, welche Felder syste
 
 ## Interfaces
 
-Daten begehbar machen. Karten, Zeitleisten, Graph-Explorer, Generous Interfaces, AR — alles, was Kulturdaten für Menschen navigierbar macht, die noch nicht wissen, wonach sie suchen. Darf auf den Ergebnissen der anderen Quests aufsetzen oder eine eigene Datengrundlage mitbringen.
+Daten begehbar machen. Karten, Zeitleisten, Graph-Explorer, Generous Interfaces, AR — alles, was Kulturdaten für Menschen navigierbar macht, die noch nicht wissen, wonach sie suchen. Der Maßstab ist nicht Vollständigkeit, sondern ob nach fünf Minuten etwas auftaucht, wonach niemand gesucht hätte.
 
 ## Verification
 
