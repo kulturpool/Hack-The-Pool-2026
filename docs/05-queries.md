@@ -6,9 +6,55 @@ Sammelstelle für alles Abfragbare: SPARQL, API-Calls, Filterausdrücke, Tricks.
 
 ## SPARQL
 
-Endpunkt `https://sparql.kulturpool.at/query`, Editor unter [sparql.kulturpool.at](https://sparql.kulturpool.at/). Der Editor öffnet mit einem lauffähigen Federated-Query-Beispiel gegen Wikidata und GND — guter Ausgangspunkt zum Umbauen.
+Endpunkt `https://sparql.kulturpool.at/query`, User Interface unter [sparql.kulturpool.at](https://sparql.kulturpool.at/).
 
-### Verbinde GND-Referenzen im Kulturpool mit Wikidata
+### Nützliche Präfixe
+
+```
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX edm:  <http://www.europeana.eu/schemas/edm/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX gnd: <https://d-nb.info/gnd/>
+PREFIX ore: <http://www.openarchives.org/ore/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX id:  <https://id.kulturpool.at/>
+```
+
+### Graph-Struktur
+
+Die Datenbank beinhaltet alle Kulturpool-Objekte im EDM-Schema. EDM Aggregations sind als `rdf:type` `ore:Aggregation` gespeichert. Der CHO ist mit der Aggregation über das Prädikat `edm:aggregatedCHO` verknüpft und vom (RDF-)Typ `edm:ProvidedCHO`.
+
+### Vollständige Abfragen
+
+#### Attribute von Aggregations
+
+```sparql
+PREFIX edm:  <http://www.europeana.eu/schemas/edm/>
+PREFIX ore: <http://www.openarchives.org/ore/terms/>
+
+SELECT * WHERE {
+  ?aggregation a ore:Aggregation .
+  ?aggregation ?pAggregation ?oAggregation .
+}
+LIMIT 100
+```
+
+#### Attribute von CHOs
+
+```sparql
+PREFIX edm:  <http://www.europeana.eu/schemas/edm/>
+PREFIX ore: <http://www.openarchives.org/ore/terms/>
+
+SELECT * WHERE {
+  ?cho a edm:ProvidedCHO .
+  ?cho ?pCHO ?oCHO .
+}
+LIMIT 100
+```
+
+#### Verbinde GND-Referenzen im Kulturpool mit Wikidata
 
 ```sparql
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -58,7 +104,34 @@ SELECT ?cho ?title ?gndCreator ?wikidataObject ?wikidataSubjectLabel ?wikidataEn
 LIMIT 50
 ```
 
-*Sammlung folgt.*
+### Good to know
+
+#### Langsame Abfrage "DISTINCT GRAPH"
+
+Eine Abfrage nach Graph-Zugehörigkeit und dem `DISTINCT` Modifier ist sehr langsam (Service Timeout):
+
+```sparql
+SELECT DISTINCT ?g WHERE {
+  GRAPH ?g {
+    ?s ?p ?o .
+  }
+} LIMIT 10
+```
+
+Einschränkung auf z.B. Prädikate (wo möglich) hilft:
+
+```sparql
+PREFIX edm:  <http://www.europeana.eu/schemas/edm/>
+
+SELECT DISTINCT ?g WHERE {
+  GRAPH ?g {
+    ?s edm:aggregatedCHO ?o .
+  }
+}
+LIMIT 10
+```
+
+Derzeit unbekannt, in welchen Abfragen und warum die `DISTINCT` Gruppierung von Graphen diese Rolle spielt.
 
 ## REST-API
 
