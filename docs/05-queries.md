@@ -54,6 +54,24 @@ SELECT * WHERE {
 LIMIT 100
 ```
 
+### Anzahl der CHOs, die denselben dc:creator haben
+
+```sparql
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?dcCreator (COUNT(?cho) AS ?count) WHERE {
+  ?cho a edm:ProvidedCHO .
+  ?cho dc:creator ?dcCreator .
+}
+
+GROUP BY ?dcCreator
+ORDER BY DESC(?count)
+
+LIMIT 100
+```
+
+
 #### Verbinde GND-Referenzen im Kulturpool mit Wikidata
 
 ```sparql
