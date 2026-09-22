@@ -6,7 +6,7 @@ Fünf Themen geben die Richtung vor. Sie sind ein Angebot, keine Vorgabe: eine Q
 
 ## Linked Open Data
 
-Kulturdaten mit Wissensgraphen verbinden. Die Stärke des [SPARQL-Endpunkts](04-daten.md#sparql) liegt in der Federated Query: Was wird sichtbar, wenn Kulturpool, Wikidata, GND, GeoNames, Iconclass und die Prosopographische Plattform Österreich gleichzeitig befragt werden?
+Die Kulturpool-Daten sind über einen [SPARQL-Endpunkts](04-daten.md#sparql) abfragbar – ihre Stärke entfalten sie in der Federated Query. Was wird sichtbar, wenn Kulturpool, GND, GeoNames, Iconclass, Wikidata und die [PFP](https://www.oeaw.ac.at/de/acdh/forschung/dh-forschung-infrastruktur/aktivitaeten/dh-datenmodellierung/pfp-prosopographische-plattform-oesterreich) des ACDH gleichzeitig befragt werden? Wer im Kulturpool als Objektschöpfer:in auftaucht, hat dort womöglich eine Biografie.
 
 ## Similarity
 
