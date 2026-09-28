@@ -135,7 +135,7 @@ async function randomReference() {
     attempt < maximumAttempts;
     attempt += 1
   ) {
-    const searchTerm = pick(randomTerms);
+    const searchTerm = pick(searchTerms);
 
     const randomPage = randomInteger(
       1,
