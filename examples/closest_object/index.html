@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guess which Kulturpool object is visually closest to the reference object.">
+  <title>Closest Culture</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <p class="eyebrow">Kulturpool visual similarity game</p>
+      <h1>Closest Object</h1>
+      <p>Which object is visually closest to the reference?</p>
+    </header>
+
+    <section class="scorebar" aria-label="Game status">
+      <span>Score <strong id="score">0</strong></span>
+      <span>Round <strong id="round">0</strong></span>
+      <button id="new-round" type="button">New round</button>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite">Loading a round…</p>
+
+    <section id="game" class="game" hidden>
+      <article class="reference-card">
+        <p class="card-label">Reference object</p>
+        <img id="reference-image" alt="" loading="eager">
+        <div class="card-copy">
+          <h2 id="reference-title"></h2>
+          <p id="reference-provider"></p>
+        </div>
+      </article>
+
+      <section aria-labelledby="choices-title">
+        <h2 id="choices-title">Choose the closest match</h2>
+        <div id="choices" class="choice-grid"></div>
+      </section>
+    </section>
+  </main>
+
+  <template id="choice-template">
+    <button class="choice-card" type="button">
+      <img alt="" loading="lazy">
+      <span class="choice-title"></span>
+      <span class="choice-result"></span>
+    </button>
+  </template>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

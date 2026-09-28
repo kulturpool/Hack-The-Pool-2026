@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A visual similarity memory game using cultural heritage objects from Kulturpool.">
+  <title>Similarity Memory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <p class="eyebrow">Kulturpool visual similarity game</p>
+      <h1>Similarity Memory</h1>
+      <p>Find pairs of visually similar cultural heritage objects. Matching cards are related, but not identical.</p>
+    </header>
+
+    <section class="toolbar" aria-label="Game status">
+      <span>Pairs <strong id="pairs-found">0 / 6</strong></span>
+      <span>Attempts <strong id="attempts">0</strong></span>
+      <span>Score <strong id="score">0</strong></span>
+      <label class="size-control" for="card-count">
+        Cards
+        <select id="card-count">
+          <option value="12" selected>12 cards</option>
+          <option value="24">24 cards</option>
+        </select>
+      </label>
+      <button id="new-game" type="button">New game</button>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite">Preparing similarity pairs…</p>
+
+    <section id="game" hidden>
+      <div id="board" class="memory-board" aria-label="Memory cards"></div>
+    </section>
+
+    <section id="result" class="result" hidden>
+      <h2>All pairs found!</h2>
+      <p id="result-copy"></p>
+      <button id="play-again" type="button">Play again</button>
+    </section>
+  </main>
+
+  <template id="card-template">
+    <button class="memory-card" type="button" aria-label="Hidden card">
+      <span class="card-inner">
+        <span class="card-face card-back" aria-hidden="true">
+          <span class="back-symbol">?</span>
+        </span>
+        <span class="card-face card-front">
+          <img alt="" loading="lazy">
+          <span class="card-copy">
+            <strong class="card-title"></strong>
+            <small class="card-provider"></small>
+          </span>
+        </span>
+      </span>
+    </button>
+  </template>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
