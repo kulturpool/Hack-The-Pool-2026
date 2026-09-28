@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build a route between cultural heritage objects using visual similarity.">
+  <title>Culture Chain</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <p class="eyebrow">Kulturpool visual similarity game</p>
+      <h1>Culture Chain</h1>
+      <p>Travel from the starting object to the target through visually similar objects.</p>
+    </header>
+
+    <section class="toolbar" aria-label="Challenge status">
+      <span>Moves <strong id="moves">0 / 6</strong></span>
+      <span>Score <strong id="score">0</strong></span>
+      <button id="back-move" class="secondary-button" type="button" disabled>Go back one move</button>
+      <button id="new-game" type="button">New challenge</button>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite">Generating a route…</p>
+
+    <section id="game" hidden>
+      <div class="goal-grid">
+        <article class="object-card current-card">
+          <p class="card-label">Current object</p>
+          <img id="current-image" alt="">
+          <div class="card-copy">
+            <h2 id="current-title"></h2>
+            <p id="current-provider"></p>
+          </div>
+        </article>
+
+        <article class="object-card target-card">
+          <p class="card-label">Target</p>
+          <img id="target-image" alt="">
+          <div class="card-copy">
+            <h2 id="target-title"></h2>
+            <p id="target-provider"></p>
+          </div>
+        </article>
+      </div>
+
+      <section class="choices-section" aria-labelledby="choices-title">
+        <h2 id="choices-title">Choose your next step</h2>
+        <p>One option continues along a pre-generated route. Other routes may work too.</p>
+        <div id="choices" class="choice-grid"></div>
+      </section>
+
+      <section class="journey" aria-labelledby="journey-title">
+        <h2 id="journey-title">Your journey</h2>
+        <div id="chain" class="chain"></div>
+      </section>
+    </section>
+
+    <section id="result" class="result" hidden>
+      <h2 id="result-title"></h2>
+      <p id="result-copy"></p>
+      <button id="show-route" class="secondary-button" type="button" hidden>Show correct route</button>
+      <div id="correct-route-panel" class="correct-route-panel" hidden>
+        <h3>Pre-generated route</h3>
+        <p>This is the route that was generated when the challenge started.</p>
+        <div id="correct-route" class="chain"></div>
+      </div>
+      <button id="play-again" type="button">Play again</button>
+    </section>
+  </main>
+
+  <template id="choice-template">
+    <button class="choice-card" type="button">
+      <img alt="" loading="lazy">
+      <span class="choice-title"></span>
+      <span class="choice-provider"></span>
+    </button>
+  </template>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

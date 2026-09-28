@@ -10,11 +10,13 @@ Notebooks, Snippets, Prototypen, Sackgassen mit Lerneffekt. Was hier landet, spa
 
 ## 2026
 
-*Noch leer. Erste Einträge kommen vor und während der Veranstaltung.*
+Erste Beispiele des Kulturpool-Teams dienen als Inspiration und Anhaltspunkt zur Nutzung der APIs.
 
 | Beispiel | Quest | Was es zeigt | Wer |
 |---|---|---|---|
-| | | | |
+| [Closest Object Game](https://kulturpool.github.io/Hack-The-Pool-2026/examples/closest_object) | Similarity | Ähnlichkeit von Objekten als Ratespiel | Kulturpool-Team |
+| [Similarity Chain Game](https://kulturpool.github.io/Hack-The-Pool-2026/examples/similarity_chain) | Similarity | Verbindungen von Objekten über Ähnlichkeit | Kulturpool-Team |
+| [Similarity Memory Game](https://kulturpool.github.io/Hack-The-Pool-2026/examples/similarity_memory) | Similarity | Paarweise Ähnlichkeit von Objekten | Kulturpool-Team |
 
 ## Projekte
 
