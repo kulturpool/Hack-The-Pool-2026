@@ -26,6 +26,10 @@ PREFIX id:  <https://id.kulturpool.at/>
 
 Die Datenbank beinhaltet alle Kulturpool-Objekte im EDM-Schema. EDM Aggregations sind als `rdf:type` `ore:Aggregation` gespeichert. Der CHO ist mit der Aggregation über das Prädikat `edm:aggregatedCHO` verknüpft und vom (RDF-)Typ `edm:ProvidedCHO`.
 
+#### Datensets als Sub-Graphen
+
+Einzelne Datensets (`edm:dataProvider`) sind als Sub-Graphen nach dem Schema `https://id.kulturpool.at/dataset/[EDM_DATAPROVIDER]#graph` verfügbar. Einzelne EDM-Records sind als Sub-Graphen nach dem Schema `https://id.kulturpool.at/[UUID]/aggregation#graph` abgelegt.
+
 ### Vollständige Abfragen
 
 #### Attribute von Aggregations
@@ -67,6 +71,18 @@ SELECT ?dcCreator (COUNT(?cho) AS ?count) WHERE {
 
 GROUP BY ?dcCreator
 ORDER BY DESC(?count)
+
+LIMIT 100
+```
+
+### Abfrage auf Datensets eingrenzen
+
+```sparql
+SELECT * WHERE {
+  GRAPH <https://id.kulturpool.at/dataset/oenb-abo#graph> {
+    ?s ?p ?o .
+  }
+}
 
 LIMIT 100
 ```
