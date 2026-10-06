@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hack The Pool 2026 · Kulturdaten-Hackathon · Wien, 27.–28. Oktober</title>
+<meta name="description" content="Hack The Pool 2026: Kulturdaten-Hackathon von Kulturpool und ACDH, 27.–28. Oktober 2026 an der Österreichischen Akademie der Wissenschaften in Wien. Linked Open Data und Ähnlichkeitssuche.">
+<meta name="theme-color" content="#06050b">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hack The Pool 2026">
+<meta property="og:description" content="Kulturdaten-Hackathon von Kulturpool und ACDH. 27.–28. Oktober 2026, ÖAW Wien. Linked Open Data × Ähnlichkeitssuche.">
+<meta property="og:url" content="https://kulturpool.github.io/Hack-The-Pool-2026/site/">
+<meta property="og:image" content="https://kulturpool.github.io/Hack-The-Pool-2026/site/img/og.jpg">
+<meta property="og:locale" content="de_AT">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/anybody-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/anybody-var-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/doto-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>
+  // Vor dem ersten Rendern: Bewegung nur, wenn das System nicht "weniger Bewegung" wünscht.
+  (function () {
+    var root = document.documentElement, q = new URLSearchParams(location.search);
+    root.className = root.className.replace("no-js", "js");
+    var calm = matchMedia("(prefers-reduced-motion: reduce)").matches || q.get("motion") === "off";
+    root.dataset.motion = calm ? "calm" : "full";
+    if (q.has("og")) root.classList.add("og");
+    if (!calm && !q.has("og")) root.classList.add("anim");
+    setTimeout(function () { if (!window.HTP_READY) root.classList.remove("anim"); }, 4000);
+  })();
+</script>
+<script defer src="vendor/gsap/gsap.min.js"></script>
+<script defer src="vendor/gsap/ScrollTrigger.min.js"></script>
+<script defer src="vendor/gsap/SplitText.min.js"></script>
+<script defer src="vendor/gsap/ScrambleTextPlugin.min.js"></script>
+<script defer src="vendor/gsap/DrawSVGPlugin.min.js"></script>
+<script defer src="js/map-data.js"></script>
+<script defer src="js/city.js"></script>
+<script defer src="js/caustics.js"></script>
+<script defer src="js/dotmatrix.js"></script>
+<script defer src="js/pool.js"></script>
+<script defer src="js/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="pinShine" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pinShade" cx="0.5" cy="0.5" r="0.5">
+      <stop offset=".72" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".5"/>
+    </radialGradient>
+    <radialGradient id="pinLod" cx="0.42" cy="0.38" r="0.62">
+      <stop offset="0" stop-color="#3a52ff"/>
+      <stop offset=".55" stop-color="#121c8c"/>
+      <stop offset="1" stop-color="#050833"/>
+    </radialGradient>
+    <radialGradient id="pinUi" cx="0.42" cy="0.38" r="0.62">
+      <stop offset="0" stop-color="#4a63ff"/>
+      <stop offset=".6" stop-color="#2236d6"/>
+      <stop offset="1" stop-color="#121c86"/>
+    </radialGradient>
+    <radialGradient id="pinSmile" cx="0.42" cy="0.36" r="0.64">
+      <stop offset="0" stop-color="#fff35c"/>
+      <stop offset=".6" stop-color="#ffd400"/>
+      <stop offset="1" stop-color="#e09f00"/>
+    </radialGradient>
+    <pattern id="hex" width="17.32" height="30" patternUnits="userSpaceOnUse" patternTransform="scale(.9)">
+      <path d="M8.66 0 17.32 5v10L8.66 20 0 15V5Z M8.66 20v10" fill="none" stroke="#3df2ff" stroke-opacity=".28" stroke-width=".8"/>
+    </pattern>
+    <path id="rimPath" d="M0,-80a80,80 0 1,1 0,160a80,80 0 1,1 0,-160"/>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f1f1f6"/>
+      <stop offset=".5" stop-color="#b9b9c6"/>
+      <stop offset="1" stop-color="#8b8b99"/>
+    </linearGradient>
+    <linearGradient id="diskShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".22"/>
+    </linearGradient>
+    <symbol id="smiley" viewBox="-50 -50 100 100">
+      <circle r="48" fill="currentColor"/>
+      <ellipse cx="-16" cy="-12" rx="5" ry="9" fill="var(--sym-ink, #000)"/>
+      <path d="M-34-40 16-14 48-18" fill="none" stroke="var(--sym-ink, #000)" stroke-width="4"/>
+      <ellipse cx="17" cy="-11" rx="12" ry="11" fill="var(--sym-ink, #000)"/>
+      <path d="M-28 10Q0 42 28 10" fill="none" stroke="var(--sym-ink, #000)" stroke-width="6" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<canvas id="city" aria-hidden="true"></canvas>
+<div class="fx" aria-hidden="true"></div>
+
+<header class="hud">
+  <a class="hud__mark" href="#top" aria-label="Hack The Pool 2026, zum Anfang">
+    <span class="hud__logo">HTP</span><span class="hud__yr">’26</span>
+  </a>
+  <nav class="hud__nav" aria-label="Abschnitte">
+    <a href="#event">Event</a>
+    <a href="#pool">Pool</a>
+    <a href="#quests">Quests</a>
+    <a href="#programm">Programm</a>
+    <a href="#daten">Daten</a>
+    <a href="#beispiele">Beispiele</a>
+    <a href="#ort">Ort</a>
+  </nav>
+  <div class="hud__right">
+    <a class="btn btn--acid btn--sm hud__cta" href="#anmeldung" data-hud-cta>Anmelden</a>
+    <button class="hud__menu" type="button" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menü</span><i></i><i></i></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Menü">
+    <a href="#event">Event</a>
+    <a href="#pool">Pool</a>
+    <a href="#quests">Quests</a>
+    <a href="#programm">Programm</a>
+    <a href="#daten">Daten</a>
+    <a href="#beispiele">Beispiele</a>
+    <a href="#ort">Ort</a>
+    <a href="#anmeldung">Anmeldung</a>
+  </nav>
+</div>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="hero__inner wrap">
+      <p class="hero__credits" data-hero="credits"><span data-scramble>Institutionenübergreifender Kulturdaten-Hackathon</span></p>
+      <h1 class="hero__title">
+        <span class="sr-only">Hack The Pool 2026</span>
+        <span class="hero__fallback" aria-hidden="true">Hack The Pool</span>
+        <canvas class="wordmark" aria-hidden="true"></canvas>
+      </h1>
+      <p class="hero__tagline" data-hero="tagline">Kopfsprung in den Kulturpool.</p>
+      <div class="hero__row" data-hero="row">
+        <p class="hero__date"><span class="led">27–28</span><span class="hero__month"><span>Oktober</span><span>2026</span></span></p>
+        <p class="hero__where">ÖAW · Bäckerstraße 13 · Wien<br><span>Linked Open Data × Ähnlichkeitssuche</span></p>
+        <div class="hero__cta">
+          <a class="btn btn--acid" href="https://umfrage.kulturpool.at/hack-the-pool-2026" data-reg-cta-hero>Anmelden <small data-reg-short>bis 6.10.</small></a>
+          <a class="btn btn--ghost" href="https://github.com/kulturpool/Hack-The-Pool-2026">Doku auf GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <span class="ticker__label"><i></i>Live aus dem Pool</span>
+      <div class="ticker__track"><div class="ticker__run" data-ticker><span>edm:ProvidedCHO</span><span>dc:creator</span><span>owl:sameAs</span><span>skos:prefLabel</span><span>dcterms:created</span><span>edm:isShownBy</span><span>edm:ProvidedCHO</span><span>dc:creator</span><span>owl:sameAs</span><span>skos:prefLabel</span><span>dcterms:created</span><span>edm:isShownBy</span></div></div>
+    </div>
+  </section>
+
+  <!-- ============ EVENT ============ -->
+  <section class="sec event" id="event" data-sec="Event">
+    <div class="wrap">
+      <h2 class="sec__title" data-stretch><span data-scramble>Das Event</span></h2>
+
+      <p class="statement" data-split>Zwei Tage lang treffen österreichische Kulturdaten auf offene Wissensgraphen. Im Fokus: <em class="hl hl--cyan">Linked Open Data</em> und <em class="hl hl--magenta">Ähnlichkeitssuche</em>.</p>
+
+      <div class="event__text prose">
+        <p>Ein Hackathon von <a href="https://kulturpool.at">Kulturpool</a> und dem <a href="https://www.oeaw.ac.at/acdh/">Austrian Centre for Digital Humanities</a> der ÖAW, gefördert von CLARIAH-AT. In zwei Tagen entstehen funktionierende Prototypen auf Basis offener Kulturdaten.</p>
+        <p>Am Ende stehen ein Projekt-Slam und Code unter freier Lizenz auf GitHub.</p>
+      </div>
+
+      <dl class="specs">
+        <div class="spec"><dt class="led">2</dt><dd><b>Tage</b>27. und 28. Oktober 2026 an der ÖAW in Wien</dd></div>
+        <div class="spec"><dt class="led">5</dt><dd><b>Quests</b>als Startpunkt, keine Vorgabe</dd></div>
+        <div class="spec"><dt class="led">0</dt><dd><b>Vorkenntnisse</b>mit den Kulturpool-APIs nötig</dd></div>
+        <div class="spec"><dt class="led">1</dt><dd><b>Bühne</b>Das Gewinner:innen-Team präsentiert beim Provider Forum am 3. November</dd></div>
+      </dl>
+
+      <div class="crowd">
+        <h3 class="kicker">Für wen</h3>
+        <p class="crowd__list">
+          <span>Entwickler:innen mit Semantic-Web-Interesse</span>
+          <span>Data Scientists</span>
+          <span>Forschende und Studierende aus Digital Humanities und Informatik</span>
+          <span>Data Stewards aus Gedächtnisinstitutionen</span>
+          <span>Kultur-Enthusiast:innen mit Projektideen</span>
+        </p>
+        <p class="crowd__note">Einzeln oder als Gruppe. Eine konkrete Idee ist willkommen, aber kein Muss.</p>
+      </div>
+
+      <div class="kit">
+        <h3 class="kicker">Was bereitsteht</h3>
+        <ul class="kit__list">
+          <li><b>Such- &amp; Objekt-API</b><span>Millionen Kulturobjekte, ohne Key</span></li>
+          <li><b>Linked Open Data</b><span>SPARQL-Endpunkt mit Wikidata-Anbindung</span></li>
+          <li><b>Ähnlichkeitssuche</b><span>Bild- und Textvektoren als Service</span></li>
+          <li><b>LLM-Kontingente</b><span>OpenRouter, Replicate und DHInfra GPU-Cluster</span></li>
+          <li><b>Tutor:innen</b><span>an beiden Tagen vor Ort</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FILMSTREIFEN ============ -->
+  <div class="reel" aria-label="Filmausschnitte aus Hackers (1995)" role="group">
+    <div class="reel__strip" data-reel>
+      <figure class="frame"><video muted loop playsinline preload="none" poster="media/title-sequence.jpg" data-src="media/title-sequence.mp4"></video><figcaption>00:04:14</figcaption></figure>
+      <figure class="frame"><video muted loop playsinline preload="none" poster="media/pool-on-the-roof.jpg" data-src="media/pool-on-the-roof.mp4"></video><figcaption>00:12:26</figcaption></figure>
+      <figure class="frame"><video muted loop playsinline preload="none" poster="media/pool-has-a-leak.jpg" data-src="media/pool-has-a-leak.mp4"></video><figcaption>00:19:42</figcaption></figure>
+      <figure class="frame"><video muted loop playsinline preload="none" poster="media/gibson-green.jpg" data-src="media/gibson-green.mp4"></video><figcaption>00:26:00</figcaption></figure>
+      <figure class="frame"><video muted loop playsinline preload="none" poster="media/gibson.jpg" data-src="media/gibson.mp4"></video><figcaption>00:29:06</figcaption></figure>
+      <figure class="frame"><video muted loop playsinline preload="none" poster="media/hack-the-planet.jpg" data-src="media/hack-the-planet.mp4"></video><figcaption>01:33:24</figcaption></figure>
+    </div>
+    <div class="band" aria-hidden="true"><div class="band__track" data-band>
+      <span>Hack the Pool</span><svg class="band__sym"><use href="#smiley"/></svg><span>27.–28. Oktober 2026</span><svg class="band__sym"><use href="#smiley"/></svg><span>ÖAW Wien</span><svg class="band__sym"><use href="#smiley"/></svg>
+    </div></div>
+    <p class="reel__credit">Hackers, 1995</p>
+  </div>
+
+  <!-- ============ POOL ============ -->
+  <section class="sec pool" id="pool" data-sec="Pool">
+    <div class="wrap">
+      <h2 class="sec__title" data-stretch><span data-scramble>Der Pool</span></h2>
+      <p class="lede">Was im Kulturpool liegt, woher es kommt und wie es aussieht. Abgefragt über die Such-API, <span data-pool-src>Stand 6.10.2026</span>.</p>
+
+      <div class="poolcount">
+        <p class="poolcount__num"><span class="led" data-count="2623787">2 623 787</span></p>
+        <p class="poolcount__label">Objekte</p>
+      </div>
+
+      <dl class="tiles">
+        <div class="tile"><dt>Datengeber</dt><dd class="led" data-kpi="providers">175</dd></div>
+        <div class="tile"><dt>Frei nachnutzbar</dt><dd class="led" data-kpi="open">766 402</dd><p class="tile__note">Reuse Policy „open“</p></div>
+        <div class="tile"><dt>Mit IIIF-Manifest</dt><dd class="led" data-kpi="iiif">1 796 631</dd></div>
+        <div class="tile"><dt>3D-Objekte</dt><dd class="led" data-kpi="3d">4 651</dd></div>
+      </dl>
+
+      <div class="chart chart--time" data-chart="time">
+        <div class="chart__head">
+          <h3 class="chart__title">Objekte nach Jahrhundert</h3>
+          <p class="chart__sub">Nach frühester Datierung. <span data-dated>1.858.861</span> Objekte sind datiert.</p>
+        </div>
+        <div class="cols" data-cols></div>
+        <details class="chart__table">
+          <summary>Als Tabelle</summary>
+          <table data-time-table><thead><tr><th scope="col">Jahrhundert</th><th scope="col">Objekte</th></tr></thead><tbody></tbody></table>
+        </details>
+      </div>
+
+      <div class="chart chart--colors" data-chart="colors">
+        <div class="chart__head">
+          <h3 class="chart__title">Bildfarben</h3>
+          <p class="chart__sub">Dominante Farbe der Abbildungen. Bunt sind nur <span data-colorful>2,0 %</span>.</p>
+        </div>
+        <div class="strip" data-strip="all"></div>
+        <p class="strip__label">Die bunten <span data-colorful-short>2 %</span>, vergrößert</p>
+        <div class="strip strip--zoom" data-strip="colorful"></div>
+        <ul class="swatches" data-swatches></ul>
+      </div>
+
+      <div class="chart chart--providers">
+        <div class="chart__head">
+          <h3 class="chart__title">Größte Datengeber</h3>
+          <p class="chart__sub">Objekte je Institution</p>
+        </div>
+        <ol class="providers" data-providers>
+          <li style="--v:1"><span class="providers__name">Österreichische Nationalbibliothek</span><span class="providers__bar"><i></i></span><span class="providers__n">676 750</span></li>
+          <li style="--v:.3648"><span class="providers__name">MAK – Museum für angewandte Kunst, Wien</span><span class="providers__bar"><i></i></span><span class="providers__n">246 901</span></li>
+          <li style="--v:.3089"><span class="providers__name">OÖ Landes-Kultur GmbH</span><span class="providers__bar"><i></i></span><span class="providers__n">209 163</span></li>
+          <li style="--v:.2953"><span class="providers__name">Naturhistorisches Museum Wien</span><span class="providers__bar"><i></i></span><span class="providers__n">199 873</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUESTS ============ -->
+  <section class="sec quests" id="quests" data-sec="Quests">
+    <div class="wrap">
+      <h2 class="sec__title" data-stretch><span data-scramble>Quests</span></h2>
+      <p class="lede">Fünf Themen als Startpunkt: eine wählen, mehrere kombinieren oder Eigenes mitbringen. LLM-Unterstützung ist überall erlaubt, Token-Kontingente stehen bereit.</p>
+    </div>
+
+    <div class="quests__pin">
+      <div class="quests__track">
+
+        <article class="quest" id="q-lod" style="--q: var(--cyan)">
+          <div class="quest__badge">
+            <svg class="pin" viewBox="-100 -100 200 200" aria-hidden="true">
+              <circle r="98" fill="url(#pinLod)"/>
+              <circle r="70" fill="url(#hex)"/>
+              <g class="pin__net" fill="none" stroke="#3df2ff" stroke-width="1.4" stroke-opacity=".85">
+                <path d="M0 0 42 0M0 0 21 36M0 0-21 36M0 0-42 0M0 0-21-36M0 0 21-36M42 0 21 36 -21 36 -42 0 -21-36 21-36Z M42 0 62 -20M21 36 40 52M-21 36-30 58M-42 0-64 14M-21-36-36-56M21-36 26-62"/>
+              </g>
+              <g fill="#3df2ff">
+                <circle cx="42" r="4.5"/><circle cx="21" cy="36" r="4.5"/><circle cx="-21" cy="36" r="4.5"/><circle cx="-42" r="4.5"/><circle cx="-21" cy="-36" r="4.5"/><circle cx="21" cy="-36" r="4.5"/>
+              </g>
+              <g fill="#fff">
+                <circle cx="62" cy="-20" r="3"/><circle cx="40" cy="52" r="3"/><circle cx="-30" cy="58" r="3"/><circle cx="-64" cy="14" r="3"/><circle cx="-36" cy="-56" r="3"/><circle cx="26" cy="-62" r="3"/>
+                <circle r="9"/>
+              </g>
+              <g class="pin__rim"><text class="pin__rimtext" fill="#fff"><textPath href="#rimPath" textLength="498" lengthAdjust="spacing">SPARQL · GND · WIKIDATA · GEONAMES · ICONCLASS · PFP ·</textPath></text></g>
+              <circle r="98" fill="url(#pinShade)"/>
+              <ellipse cx="-34" cy="-46" rx="52" ry="30" transform="rotate(-32 -34 -46)" fill="url(#pinShine)"/>
+            </svg>
+          </div>
+          <div class="quest__body">
+            <p class="quest__no"><span class="led">Q1</span><span>/ 5</span></p>
+            <h3 class="quest__name" data-fit="130"><span>Linked Open Data</span></h3>
+            <p class="quest__tag">Kulturdaten mit Wissensgraphen verbinden.</p>
+            <p>Die Kulturpool-Daten sind über einen SPARQL-Endpunkt abfragbar, ihre Stärke entfalten sie in der Federated Query. Was wird sichtbar, wenn Kulturpool, GND, GeoNames, Iconclass, Wikidata und die <a href="https://www.oeaw.ac.at/de/acdh/forschung/dh-forschung-infrastruktur/aktivitaeten/dh-datenmodellierung/pfp-prosopographische-plattform-oesterreich">PFP</a> des ACDH gleichzeitig befragt werden? Wer im Kulturpool als Objektschöpfer:in auftaucht, hat dort womöglich eine Biografie.</p>
+          </div>
+        </article>
+
+        <article class="quest" id="q-similarity" style="--q: var(--burn)">
+          <div class="quest__badge">
+            <svg class="pin" viewBox="-100 -100 200 200" aria-hidden="true">
+              <circle r="98" fill="#0b0a0d"/>
+              <g class="pin__dots" data-halftone></g>
+              <text class="pin__word" x="0" y="54" text-anchor="middle">similar</text>
+              <g class="pin__rim"><text class="pin__rimtext" fill="#ff7a3d"><textPath href="#rimPath" textLength="498" lengthAdjust="spacing">BILD · TEXT · VEKTOR · NÄHE · BILD · TEXT · VEKTOR · NÄHE ·</textPath></text></g>
+              <circle r="98" fill="url(#pinShade)"/>
+              <ellipse cx="-34" cy="-46" rx="52" ry="30" transform="rotate(-32 -34 -46)" fill="url(#pinShine)" opacity=".55"/>
+            </svg>
+          </div>
+          <div class="quest__body">
+            <p class="quest__no"><span class="led">Q2</span><span>/ 5</span></p>
+            <h3 class="quest__name" data-fit="130"><span>Similarity</span></h3>
+            <p class="quest__tag">Ähnliches finden, das niemand gesucht hat.</p>
+            <p>Bilder und Beschreibungstexte liegen als Vektoren vor: Nähe im Raum bedeutet Ähnlichkeit. Gesucht wird nicht nach Wörtern, sondern nach Bedeutung und Bildinhalt. Dieselbe Vorlage in anderen Sammlungen, ein Motiv auf seinem Weg durch die Jahrhunderte: Das findet keine Stichwortsuche.</p>
+          </div>
+        </article>
+
+        <article class="quest" id="q-quality" style="--q: #f2f2f2">
+          <div class="quest__badge">
+            <svg class="pin" viewBox="-100 -100 200 200" aria-hidden="true">
+              <circle r="98" fill="#0d0d10"/>
+              <rect x="-50" y="-50" width="100" height="100" transform="rotate(45)" fill="none" stroke="#f2f2f2" stroke-width="6"/>
+              <g fill="#f2f2f2">
+                <rect x="-24" y="-2" width="9" height="16"/>
+                <rect x="-2" y="-20" width="9" height="34"/>
+              </g>
+              <rect x="-13" y="-12" width="9" height="26" fill="none" stroke="#f2f2f2" stroke-width="1.6" stroke-dasharray="3 2.4"/>
+              <circle cx="-8" cy="-3" r="27" fill="none" stroke="#f2f2f2" stroke-width="6"/>
+              <path d="M12 17 30 35" stroke="#f2f2f2" stroke-width="10" stroke-linecap="round"/>
+              <g class="pin__rim"><text class="pin__rimtext" fill="#f2f2f2"><textPath href="#rimPath" textLength="498" lengthAdjust="spacing">HINSCHAUEN · WO ES WEHTUT · HINSCHAUEN · WO ES WEHTUT ·</textPath></text></g>
+              <circle r="98" fill="url(#pinShade)"/>
+              <ellipse cx="-34" cy="-46" rx="52" ry="30" transform="rotate(-32 -34 -46)" fill="url(#pinShine)" opacity=".5"/>
+            </svg>
+          </div>
+          <div class="quest__body">
+            <p class="quest__no"><span class="led">Q3</span><span>/ 5</span></p>
+            <h3 class="quest__name" data-fit="130"><span>Data Quality</span></h3>
+            <p class="quest__tag">Hinschauen, wo es wehtut.</p>
+            <p>Welche Bestände sind lückenhaft, welche Felder systematisch fehlerhaft, welche Regionen, Epochen oder Perspektiven unterrepräsentiert? Diese Quest braucht kein Deployment, sondern einen genauen Blick, und liefert dem Kulturpool und seinen Partnerinstitutionen direkt verwertbare Ergebnisse.</p>
+          </div>
+        </article>
+
+        <article class="quest" id="q-interfaces" style="--q: var(--cobalt-hi)">
+          <div class="quest__badge">
+            <svg class="pin" viewBox="-100 -100 200 200" aria-hidden="true">
+              <circle r="98" fill="url(#pinUi)"/>
+              <rect x="-50" y="-56" width="78" height="58" rx="5" fill="none" stroke="#fff" stroke-width="5"/>
+              <path d="M-50-42H28" stroke="#fff" stroke-width="4"/>
+              <circle cx="-41" cy="-49" r="2.6" fill="#fff"/><circle cx="-33" cy="-49" r="2.6" fill="#fff"/>
+              <path d="M10-18 10 30 21 19 30 38 38 34 29 15 45 15Z" fill="#fff" stroke="#1b2bc4" stroke-width="3" stroke-linejoin="round"/>
+              <g stroke="#ffe600" stroke-width="4" stroke-linecap="round">
+                <path d="M2-26-6-36"/><path d="M14-30 16-42"/><path d="M-2-14-14-16"/><path d="M24-24 32-34"/>
+              </g>
+              <text class="pin__script" x="0" y="66" text-anchor="middle" transform="rotate(-7)">Interfaces</text>
+              <circle r="98" fill="url(#pinShade)"/>
+              <ellipse cx="-34" cy="-46" rx="52" ry="30" transform="rotate(-32 -34 -46)" fill="url(#pinShine)" opacity=".7"/>
+            </svg>
+          </div>
+          <div class="quest__body">
+            <p class="quest__no"><span class="led">Q4</span><span>/ 5</span></p>
+            <h3 class="quest__name" data-fit="130"><span>Interfaces</span></h3>
+            <p class="quest__tag">Daten begehbar machen.</p>
+            <p>Karten, Zeitleisten, Graph-Explorer, Generous Interfaces, AR: alles, was Kulturdaten für Menschen navigierbar macht, die noch nicht wissen, wonach sie suchen. Der Maßstab ist nicht Vollständigkeit, sondern ob nach fünf Minuten etwas auftaucht, wonach niemand gesucht hätte.</p>
+          </div>
+        </article>
+
+        <article class="quest" id="q-verification" style="--q: var(--acid)">
+          <div class="quest__badge">
+            <svg class="pin" viewBox="-100 -100 200 200" aria-hidden="true">
+              <circle r="98" fill="url(#pinSmile)"/>
+              <ellipse cx="-31" cy="-22" rx="10" ry="17" fill="#0b0900"/>
+              <path d="M-66-74 26-24 98-34" fill="none" stroke="#0b0900" stroke-width="7"/>
+              <ellipse cx="32" cy="-20" rx="24" ry="21" fill="#0b0900"/>
+              <path d="M-56 20Q0 84 56 20" fill="none" stroke="#0b0900" stroke-width="11" stroke-linecap="round"/>
+              <circle r="98" fill="url(#pinShade)"/>
+              <ellipse cx="-34" cy="-46" rx="52" ry="30" transform="rotate(-32 -34 -46)" fill="url(#pinShine)"/>
+            </svg>
+          </div>
+          <div class="quest__body">
+            <p class="quest__no"><span class="led">Q5</span><span>/ 5</span></p>
+            <h3 class="quest__name" data-fit="130"><span>Verification</span></h3>
+            <p class="quest__tag">Human in the Loop statt blindem Vertrauen.</p>
+            <p>Im KI-Harmonisierungsprojekt wurde der Bestand um spekulative Anreicherungen ergänzt: Datierungen, Orte, Personenbezüge, allein aus Textwerten abgeleitet und abrufbar über <a href="https://lookup.kulturpool.ai/">lookup.kulturpool.ai</a>. Der Korpus enthält zahlreiche False Positives. Wie lässt er sich systematisch prüfen, korrigieren und gezielt weiter anreichern?</p>
+          </div>
+        </article>
+
+      </div>
+      <ol class="quests__dots" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ol>
+    </div>
+  </section>
+
+  <!-- ============ PROGRAMM ============ -->
+  <section class="sec programm" id="programm" data-sec="Programm">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2 class="sec__title" data-stretch><span data-scramble>Programm</span></h2>
+        <p class="sec__aside" data-event-state></p>
+      </div>
+
+      <div class="days">
+        <div class="day" data-day="2026-10-27">
+          <h3 class="day__name"><span class="led">Di 27</span><span>Oktober · Tag 1</span></h3>
+          <div class="day__bar" aria-hidden="true"></div>
+          <ol class="slots">
+            <li data-t="09:00" data-end="10:00"><time>09:00</time><span>Welcome, Themen &amp; Quests</span></li>
+            <li data-t="10:00" data-end="13:00"><time>10:00</time><span>Teams und Ideen finden</span></li>
+            <li data-t="13:00" data-end="14:00" class="is-food"><time>13:00</time><span>Mittagessen</span></li>
+            <li data-t="14:00" data-end="17:00" class="is-hack"><time>14:00</time><span>Hacken</span></li>
+            <li data-t="17:00" data-end="18:00" class="is-key"><time>17:00</time><span>Zwischenstand <small>Ziel, Stand, offene Fragen</small></span></li>
+            <li data-t="18:00" data-end="22:00" class="is-food"><time>18:00</time><span>Abendessen, danach weiter</span></li>
+            <li data-t="22:00"><time>22:00</time><span>Location schließt</span></li>
+          </ol>
+        </div>
+        <div class="day" data-day="2026-10-28">
+          <h3 class="day__name"><span class="led">Mi 28</span><span>Oktober · Tag 2</span></h3>
+          <div class="day__bar" aria-hidden="true"></div>
+          <ol class="slots">
+            <li data-t="09:00" data-end="13:00" class="is-hack"><time>09:00</time><span>Hacken</span></li>
+            <li data-t="13:00" data-end="14:00" class="is-food"><time>13:00</time><span>Mittagessen</span></li>
+            <li data-t="14:00" data-end="14:30" class="is-hack"><time>14:00</time><span>Letzter Schliff</span></li>
+            <li data-t="14:30" data-end="15:15" class="is-key"><time>14:30</time><span>Projekt-Slam <small>kurz, laut, alle Teams</small></span></li>
+            <li data-t="15:15" data-end="16:00" class="is-key"><time>15:15</time><span>Preisverleihung</span></li>
+            <li data-t="16:00"><time>16:00</time><span>Ende</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="programm__notes">
+        <p><b>Zwischenstand</b> am ersten Abend, drei Fragen pro Team: Was ist unser Ziel? Was haben wir geschafft? Wo brauchen wir Hilfe?</p>
+        <p><b>World-Café</b> Tischinseln im Hauptraum, Breakout-Räume für Teams, die Ruhe brauchen. Tutor:innen sind an beiden Tagen vor Ort.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DATEN ============ -->
+  <section class="sec daten" id="daten" data-sec="Daten">
+    <div class="wrap">
+      <h2 class="sec__title" data-stretch><span data-scramble>Daten &amp; APIs</span></h2>
+      <p class="lede">Kein API-Key, keine Rate Limits.</p>
+
+      <div class="panel panel--search">
+        <div class="panel__head"><span>Live-Suche</span><code>GET api.kulturpool.at/v2/search</code></div>
+        <div class="console">
+          <form class="console__form" role="search" data-search>
+            <label class="sr-only" for="q">Suchbegriff</label>
+            <input id="q" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Gletscher" enterkeyhint="search">
+            <button class="btn btn--acid btn--sm" type="submit">Suchen</button>
+          </form>
+          <div class="console__meta" aria-live="polite">
+            <span class="console__mode" data-mode>Suche</span>
+            <span><b class="led" data-found>—</b> Treffer</span>
+            <span><b data-ms>—</b> ms</span>
+            <button class="console__reset" type="button" data-reset hidden>Zurück zur Suche</button>
+          </div>
+          <ul class="console__grid" data-results></ul>
+          <p class="console__hint">Objekt anklicken: <code>/v2/similar?on=image</code> zeigt visuell ähnliche Objekte.</p>
+        </div>
+      </div>
+
+      <ul class="res">
+        <li class="res__row">
+          <h3 class="res__name">Kulturpool API</h3>
+          <p class="res__url"><a href="https://api.kulturpool.at/reference/">api.kulturpool.at/reference</a><span class="status" data-ping="api"><i></i><span>prüfe…</span></span></p>
+          <p class="res__txt">Suche, Objekte, Ähnlichkeit, Institutionen, Inhalte. Endpunkte, Parameter und Beispiele in der Referenz.</p>
+        </li>
+        <li class="res__row">
+          <h3 class="res__name">SPARQL</h3>
+          <p class="res__url"><code>https://sparql.kulturpool.at/query</code><button class="copy" type="button" data-copy="https://sparql.kulturpool.at/query">kopieren</button><span class="status" data-ping="sparql"><i></i><span>prüfe…</span></span></p>
+          <p class="res__txt">Europeana Data Model. Editor unter <a href="https://sparql.kulturpool.at/">sparql.kulturpool.at</a>.</p>
+        </li>
+        <li class="res__row">
+          <h3 class="res__name">Nightly Dumps</h3>
+          <p class="res__url"><a href="https://s3.kpool.at/nightly/full_records.tar.gz">s3.kpool.at/nightly/full_records.tar.gz</a></p>
+          <p class="res__txt">Vollabzug, täglich aktualisiert. Für alles, was lokal schneller geht als über die API.</p>
+        </li>
+        <li class="res__row">
+          <h3 class="res__name">Wikidata-Lookup</h3>
+          <p class="res__url"><a href="https://lookup.kulturpool.ai/">lookup.kulturpool.ai</a></p>
+          <p class="res__txt">Ergebnisse des KI-Harmonisierungsprojekts, Grundlage der Verification-Quest.</p>
+        </li>
+        <li class="res__row">
+          <h3 class="res__name">Externe Graphen</h3>
+          <p class="res__url res__url--list"><a href="https://query.wikidata.org/sparql">Wikidata</a> <a href="https://lobid.org/gnd/api">GND</a> <a href="https://reconcile.gnd.network">GND Reconciliation</a> <a href="https://www.geonames.org/export/">GeoNames</a> <a href="https://iconclass.org/help/lod">Iconclass</a> <a href="https://api.europeana.eu/console/sparql/">Europeana</a></p>
+          <p class="res__txt">Für Federated Queries, dazu die PFP des ACDH.</p>
+        </li>
+        <li class="res__row">
+          <h3 class="res__name">Werkzeuge</h3>
+          <p class="res__url res__url--list"><a href="https://pypi.org/project/edmlib/">edmlib</a> <a href="https://github.com/the-qa-company/qEndpoint">qEndpoint</a></p>
+          <p class="res__txt">edmlib für das Europeana Data Model, qEndpoint für einen lokalen Wikidata-Triplestore.</p>
+        </li>
+        <li class="res__row">
+          <h3 class="res__name">LLM-Zugang</h3>
+          <p class="res__url res__url--list"><a href="https://openrouter.ai/">OpenRouter</a> <a href="https://replicate.com/">Replicate</a> <a href="https://www.dhinfra.at/gpu-cluster/">DHInfra GPU-Cluster</a></p>
+          <p class="res__txt">Zugangsdaten gibt es am ersten Tag vor Ort.</p>
+        </li>
+      </ul>
+
+      <div class="query">
+        <figure class="panel panel--code">
+          <div class="panel__head"><span>SPARQL</span><span class="panel__actions"><button class="copy" type="button" data-copy-code>kopieren</button><a class="copy" href="https://sparql.kulturpool.at/">Editor</a></span></div>
+          <pre class="code" data-sparql><code>PREFIX edm: &lt;http://www.europeana.eu/schemas/edm/&gt;
+PREFIX dc:  &lt;http://purl.org/dc/elements/1.1/&gt;
+
+# Wer hat die meisten Objekte im Pool?
+SELECT ?dcCreator (COUNT(?cho) AS ?count) WHERE {
+  ?cho a edm:ProvidedCHO .
+  ?cho dc:creator ?dcCreator .
+}
+GROUP BY ?dcCreator
+ORDER BY DESC(?count)
+LIMIT 100</code></pre>
+        </figure>
+        <div class="query__side">
+          <h3 class="kicker">Mehr Abfragen</h3>
+          <p class="query__txt">Graph-Struktur, Datensets als Sub-Graphen, GND-Referenzen mit Wikidata verbinden, REST-Beispiele mit curl: gesammelt im Repo, Beiträge willkommen.</p>
+          <p><a class="arrow-link" href="https://github.com/kulturpool/Hack-The-Pool-2026/blob/main/docs/05-queries.md">05 · Queries</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BEISPIELE ============ -->
+  <section class="sec beispiele" id="beispiele" data-sec="Beispiele">
+    <div class="wrap">
+      <h2 class="sec__title" data-stretch><span data-scramble>Beispiele</span></h2>
+      <p class="lede">Erste Beispiele des Kulturpool-Teams zeigen, wie die APIs funktionieren. Alle laufen direkt im Browser.</p>
+
+      <div class="disks">
+        <a class="disk" href="../examples/closest_object/" style="--disk: var(--acid); --disk-tab: #0b0900">
+          <svg class="floppy" viewBox="0 0 200 200" aria-hidden="true">
+            <path d="M12 3h168l17 17v168a9 9 0 0 1-9 9H12a9 9 0 0 1-9-9V12a9 9 0 0 1 9-9Z" fill="var(--disk)"/>
+            <path d="M12 3h168l17 17v168a9 9 0 0 1-9 9H12a9 9 0 0 1-9-9V12a9 9 0 0 1 9-9Z" fill="url(#diskShade)"/>
+            <rect x="104" y="11" width="24" height="48" rx="2" fill="#2b2119"/>
+            <path class="floppy__shutter" fill="url(#metal)" fill-rule="evenodd" d="M50 3h98v64H50Z M71 11h24v48H71Z"/>
+            <rect x="24" y="88" width="152" height="104" rx="4" fill="#f5f1e6"/>
+            <rect x="24" y="88" width="152" height="15" rx="4" fill="var(--disk-tab)"/>
+            <g stroke="#d4cdbb" stroke-width="1"><path d="M34 126h132M34 144h132M34 162h132M34 180h132"/></g>
+            <rect x="9" y="176" width="11" height="11" fill="#000" opacity=".45"/>
+            <path d="M12 10h9l-4.5 7z" fill="#000" opacity=".5"/>
+          </svg>
+          <span class="disk__label"><b>Closest Object</b><i>Ähnlichkeit als Ratespiel</i></span>
+        </a>
+        <a class="disk" href="../examples/similarity_chain/" style="--disk: var(--cyan); --disk-tab: #ff2bd1">
+          <svg class="floppy" viewBox="0 0 200 200" aria-hidden="true">
+            <path d="M12 3h168l17 17v168a9 9 0 0 1-9 9H12a9 9 0 0 1-9-9V12a9 9 0 0 1 9-9Z" fill="var(--disk)"/>
+            <path d="M12 3h168l17 17v168a9 9 0 0 1-9 9H12a9 9 0 0 1-9-9V12a9 9 0 0 1 9-9Z" fill="url(#diskShade)"/>
+            <rect x="104" y="11" width="24" height="48" rx="2" fill="#2b2119"/>
+            <path class="floppy__shutter" fill="url(#metal)" fill-rule="evenodd" d="M50 3h98v64H50Z M71 11h24v48H71Z"/>
+            <rect x="24" y="88" width="152" height="104" rx="4" fill="#f5f1e6"/>
+            <rect x="24" y="88" width="152" height="15" rx="4" fill="var(--disk-tab)"/>
+            <g stroke="#d4cdbb" stroke-width="1"><path d="M34 126h132M34 144h132M34 162h132M34 180h132"/></g>
+            <rect x="9" y="176" width="11" height="11" fill="#000" opacity=".45"/>
+            <path d="M12 10h9l-4.5 7z" fill="#000" opacity=".5"/>
+          </svg>
+          <span class="disk__label"><b>Similarity Chain</b><i>Verbindungen über Ähnlichkeit</i></span>
+        </a>
+        <a class="disk" href="../examples/similarity_memory/" style="--disk: var(--magenta); --disk-tab: #ffe600">
+          <svg class="floppy" viewBox="0 0 200 200" aria-hidden="true">
+            <path d="M12 3h168l17 17v168a9 9 0 0 1-9 9H12a9 9 0 0 1-9-9V12a9 9 0 0 1 9-9Z" fill="var(--disk)"/>
+            <path d="M12 3h168l17 17v168a9 9 0 0 1-9 9H12a9 9 0 0 1-9-9V12a9 9 0 0 1 9-9Z" fill="url(#diskShade)"/>
+            <rect x="104" y="11" width="24" height="48" rx="2" fill="#2b2119"/>
+            <path class="floppy__shutter" fill="url(#metal)" fill-rule="evenodd" d="M50 3h98v64H50Z M71 11h24v48H71Z"/>
+            <rect x="24" y="88" width="152" height="104" rx="4" fill="#f5f1e6"/>
+            <rect x="24" y="88" width="152" height="15" rx="4" fill="var(--disk-tab)"/>
+            <g stroke="#d4cdbb" stroke-width="1"><path d="M34 126h132M34 144h132M34 162h132M34 180h132"/></g>
+            <rect x="9" y="176" width="11" height="11" fill="#000" opacity=".45"/>
+            <path d="M12 10h9l-4.5 7z" fill="#000" opacity=".5"/>
+          </svg>
+          <span class="disk__label"><b>Similarity Memory</b><i>Paarweise Ähnlichkeit</i></span>
+        </a>
+        <a class="disk disk--empty" href="https://github.com/kulturpool/Hack-The-Pool-2026/blob/main/docs/06-beispiele.md">
+          <svg class="floppy" viewBox="0 0 200 200" aria-hidden="true">
+            <path d="M12 3h168l17 17v168a9 9 0 0 1-9 9H12a9 9 0 0 1-9-9V12a9 9 0 0 1 9-9Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="8 7"/>
+            <path d="M100 74v52M74 100h52" stroke="currentColor" stroke-width="3"/>
+          </svg>
+          <span class="disk__label"><b>Euer Projekt</b><i>Nach dem Slam verlinkt. Beiträge per Pull Request.</i></span>
+        </a>
+      </div>
+
+      <div class="archive">
+        <h3 class="kicker">Vorjahr · <a href="https://github.com/kulturpool/Hack-The-Pool-2025">Hack The Pool 2025</a></h3>
+        <ol class="archive__list">
+          <li><a href="https://kulturpool.github.io/Hack-The-Pool-2025/automated-summaries/"><span class="archive__path">automated-summaries</span><span class="archive__txt">KI-gestützte Kultursuche mit automatischen Zusammenfassungen</span></a></li>
+          <li><a href="https://kulturpool.github.io/Hack-The-Pool-2025/fullscreen-shuffle"><span class="archive__path">fullscreen-shuffle</span><span class="archive__txt">Vollbild-Diashow von Kulturbildern</span></a></li>
+          <li><a href="https://kulturpool.github.io/Hack-The-Pool-2025/color-sort/"><span class="archive__path">color-sort</span><span class="archive__txt">Farbanalyse von Kulturbildern</span></a></li>
+          <li><a href="https://kulturpool.github.io/Hack-The-Pool-2025/cluster-subjects/"><span class="archive__path">cluster-subjects</span><span class="archive__txt">Netzwerk thematischer Verbindungen</span></a></li>
+          <li><a href="https://kulturpool.github.io/Hack-The-Pool-2025/wikidata-connect/"><span class="archive__path">wikidata-connect</span><span class="archive__txt">Kulturobjekte mit Wikidata verknüpfen</span></a></li>
+          <li><a href="https://kulturpool.github.io/Hack-The-Pool-2025/year-guessing-game/"><span class="archive__path">year-guessing-game</span><span class="archive__txt">Jahreszahlen erraten</span></a></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ORT ============ -->
+  <section class="sec ort" id="ort" data-sec="Ort">
+    <div class="wrap">
+      <h2 class="sec__title" data-stretch><span data-scramble>Ort</span></h2>
+      <div class="ort__grid">
+        <div class="ort__addr">
+          <p class="ort__name">Österreichische Akademie der Wissenschaften</p>
+          <p class="ort__street">Bäckerstraße 13<br>1010 Wien</p>
+          <p class="ort__geo led">48.2086 N · 16.3780 E</p>
+          <ul class="lines">
+            <li><span class="ln ln--u3">U3</span><span class="ln ln--tram">2</span>Stubentor</li>
+            <li><span class="ln ln--u1">U1</span><span class="ln ln--u3">U3</span>Stephansplatz</li>
+            <li><span class="ln ln--u1">U1</span><span class="ln ln--u4">U4</span>Schwedenplatz</li>
+          </ul>
+          <p class="ort__note">Zwei Gehminuten vom Stephansplatz. Die ganze Gegend ist Kurzparkzone, besser mit Öffis oder Rad.</p>
+          <p class="maps">
+            <a href="https://www.openstreetmap.org/search?query=B%C3%A4ckerstra%C3%9Fe%2013%2C%201010%20Wien">OpenStreetMap</a>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=B%C3%A4ckerstra%C3%9Fe+13%2C+1010+Wien">Google Maps</a>
+            <a href="https://maps.apple.com/?q=B%C3%A4ckerstra%C3%9Fe+13,+1010+Wien">Apple Maps</a>
+            <a href="https://www.wienerlinien.at/verbindungen">Wiener Linien</a>
+          </p>
+        </div>
+        <figure class="map" data-map>
+          <figcaption>Kartendaten © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-Mitwirkende</a></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ANMELDUNG ============ -->
+  <section class="finale" id="anmeldung" data-sec="Anmeldung">
+    <div class="finale__bg" aria-hidden="true">
+      <video class="finale__video" muted loop playsinline preload="none" poster="media/the-pool.jpg" data-src="media/the-pool.mp4"></video>
+      <canvas class="finale__water"></canvas>
+    </div>
+    <div class="finale__inner wrap">
+      <h2 class="finale__title" data-finale-title>Hack the Pool</h2>
+      <div class="finale__state">
+        <p class="finale__deadline" data-reg-text>Anmeldung bis <strong>6. Oktober 2026, 23:59</strong></p>
+        <p class="finale__countdown led" data-reg-countdown aria-hidden="true"></p>
+      </div>
+      <p class="finale__go"><a class="btn btn--acid btn--xl" href="https://umfrage.kulturpool.at/hack-the-pool-2026" data-reg-cta>Jetzt anmelden</a></p>
+      <p class="finale__sub">Einzeln oder als Gruppe. Infos zur Veranstaltung auf <a href="https://info.kulturpool.at/hack-the-pool-2026/">info.kulturpool.at</a>.</p>
+
+      <div class="contrib">
+        <h3 class="kicker">Mitsammeln</h3>
+        <p>Queries und Beispiele wachsen im Repo. Neues kommt per Pull Request in <a href="https://github.com/kulturpool/Hack-The-Pool-2026/blob/main/docs/05-queries.md">05 · Queries</a> oder <a href="https://github.com/kulturpool/Hack-The-Pool-2026/blob/main/docs/06-beispiele.md">06 · Beispiele</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot__mark" aria-hidden="true">Hack the Pool</p>
+    <div class="foot__grid">
+      <p>Ein Hackathon von <a href="https://kulturpool.at">Kulturpool</a> und dem <a href="https://www.oeaw.ac.at/acdh/">ACDH</a> der ÖAW, gefördert von CLARIAH-AT.</p>
+      <p>Doku, Queries und Beispiele: <a href="https://github.com/kulturpool/Hack-The-Pool-2026">github.com/kulturpool/Hack-The-Pool-2026</a></p>
+      <p>Vorjahr: <a href="https://github.com/kulturpool/Hack-The-Pool-2025">Hack The Pool 2025</a></p>
+      <p>Filmausschnitte: <i>Hackers</i> (1995). Karte: © OpenStreetMap-Mitwirkende.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
