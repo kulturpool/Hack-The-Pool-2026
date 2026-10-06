@@ -4,19 +4,28 @@ Notebooks, Snippets, Prototypen, Sackgassen mit Lerneffekt. Was hier landet, spa
 
 ![Files](gifs/hackers-files.gif)
 
-## Aus dem Vorjahr
+## 2025
 
 [Hack The Pool 2025](https://github.com/kulturpool/Hack-The-Pool-2025) — Beispiele und Projekte der letzten Ausgabe. Die APIs haben sich seither weiterentwickelt, das Meiste lässt sich trotzdem übertragen.
+
+| Beispiel | Was es zeigt |
+|---|---|
+| [automated-summaries](https://kulturpool.github.io/Hack-The-Pool-2025/automated-summaries/) | KI-gestützte Kultursuche mit automatischen Zusammenfassungen |
+| [fullscreen-shuffle](https://kulturpool.github.io/Hack-The-Pool-2025/fullscreen-shuffle) | Immersive Vollbild-Diashow von Kulturbildern |
+| [color-sort](https://kulturpool.github.io/Hack-The-Pool-2025/color-sort/) | Datenvisualisierung zur Farbanalyse von Kulturbildern |
+| [cluster-subjects](https://kulturpool.github.io/Hack-The-Pool-2025/cluster-subjects/) | Netzwerkvisualisierung thematischer Verbindungen |
+| [wikidata-connect](https://kulturpool.github.io/Hack-The-Pool-2025/wikidata-connect/) | Verknüpfung von Kulturobjekten mit Wikidata |
+| [year-guessing-game](https://kulturpool.github.io/Hack-The-Pool-2025/year-guessing-game/) | Jahreszahlen erraten |
 
 ## 2026
 
 Erste Beispiele des Kulturpool-Teams dienen als Inspiration und Anhaltspunkt zur Nutzung der APIs.
 
-| Beispiel | Quest | Was es zeigt | Wer |
-|---|---|---|---|
-| [Closest Object Game](https://kulturpool.github.io/Hack-The-Pool-2026/examples/closest_object) | Similarity | Ähnlichkeit von Objekten als Ratespiel | Kulturpool-Team |
-| [Similarity Chain Game](https://kulturpool.github.io/Hack-The-Pool-2026/examples/similarity_chain) | Similarity | Verbindungen von Objekten über Ähnlichkeit | Kulturpool-Team |
-| [Similarity Memory Game](https://kulturpool.github.io/Hack-The-Pool-2026/examples/similarity_memory) | Similarity | Paarweise Ähnlichkeit von Objekten | Kulturpool-Team |
+| Beispiel | Was es zeigt |
+|---|---|
+| [Closest Object Game](https://kulturpool.github.io/Hack-The-Pool-2026/examples/closest_object) | Ähnlichkeit von Objekten als Ratespiel |
+| [Similarity Chain Game](https://kulturpool.github.io/Hack-The-Pool-2026/examples/similarity_chain) | Verbindungen von Objekten über Ähnlichkeit |
+| [Similarity Memory Game](https://kulturpool.github.io/Hack-The-Pool-2026/examples/similarity_memory) | Paarweise Ähnlichkeit von Objekten |
 
 ## Projekte
 
