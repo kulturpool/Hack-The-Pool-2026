@@ -196,7 +196,14 @@
     var btn = $("[data-play]", win), tc = $("[data-tc]", win), base = 0;
     v._btn = btn;
     if (tc) { var p = tc.textContent.split(":"); base = (+p[0]) * 3600 + (+p[1]) * 60 + (+p[2]); }
-    v.addEventListener("timeupdate", function () { if (tc) tc.textContent = hms(base + v.currentTime); });
+    var cues = []; try { cues = JSON.parse(v.dataset.cues || "[]"); } catch (e) {}
+    var sub = $(".win__sub", win);
+    v.addEventListener("timeupdate", function () {
+      var t = v.currentTime, txt = "";
+      if (tc) tc.textContent = hms(base + t);
+      for (var i = 0; i < cues.length; i++) if (t >= cues[i][0] && t < cues[i][1]) { txt = cues[i][2]; break; }
+      if (sub && sub.textContent !== txt) sub.textContent = txt;
+    });
     v.addEventListener("play", function () { syncBtn(v); });
     v.addEventListener("pause", function () { syncBtn(v); });
     var toggle = function () { if (v.paused) { v._userPaused = false; start(v); } else { v._userPaused = true; v.pause(); } };

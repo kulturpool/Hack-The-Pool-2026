@@ -12,7 +12,7 @@ Der Kulturpool wird zur Datenstadt aus *Hackers* (1995). Gläserne Türme tragen
   - Punktmatrix-Wortmarke
   - Quest-Pins
   - 3,5″-Disketten für die Beispiele
-  - Retro-Fenster mit Filmausschnitten in allen Bereichen
+  - Retro-Fenster mit Filmausschnitten und Untertiteln in allen Bereichen
   - Inhaltsfenster zum Herumschauen
   - die Innere Stadt als Platine
   - Pool-Licht im Finale
