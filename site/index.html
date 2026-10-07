@@ -36,6 +36,8 @@
 <script defer src="vendor/gsap/SplitText.min.js"></script>
 <script defer src="vendor/gsap/ScrambleTextPlugin.min.js"></script>
 <script defer src="vendor/gsap/DrawSVGPlugin.min.js"></script>
+<script defer src="vendor/gsap/Draggable.min.js"></script>
+<script defer src="vendor/gsap/InertiaPlugin.min.js"></script>
 <script defer src="js/map-data.js"></script>
 <script defer src="js/city.js"></script>
 <script defer src="js/caustics.js"></script>
@@ -129,6 +131,16 @@
   </nav>
 </div>
 
+<nav class="toc is-collapsed" id="toc" aria-label="Inhalt">
+  <div class="toc__bar">
+    <span class="win__close" aria-hidden="true"></span>
+    <span class="toc__title">INHALT</span>
+    <button class="toc__toggle" type="button" aria-expanded="false" aria-controls="toc-list"><span class="sr-only">Inhalt ein- oder ausklappen</span></button>
+  </div>
+  <ol class="toc__list" id="toc-list"></ol>
+  <div class="toc__foot" data-toc-open><span data-toc-pos>Start</span><span class="toc__meter"><i data-toc-progress></i></span></div>
+</nav>
+
 <main id="main">
 
   <!-- ============ HERO ============ -->
@@ -152,7 +164,7 @@
     </div>
     <div class="ticker" aria-hidden="true">
       <span class="ticker__label"><i></i>Live aus dem Pool</span>
-      <div class="ticker__track"><div class="ticker__run" data-ticker><span>edm:ProvidedCHO</span><span>dc:creator</span><span>owl:sameAs</span><span>skos:prefLabel</span><span>dcterms:created</span><span>edm:isShownBy</span><span>edm:ProvidedCHO</span><span>dc:creator</span><span>owl:sameAs</span><span>skos:prefLabel</span><span>dcterms:created</span><span>edm:isShownBy</span></div></div>
+      <div class="ticker__track"><div class="ticker__run" data-ticker><span><b>Bilder</b> <em>1 440 909</em></span><span><b>Texte</b> <em>1 173 956</em></span><span><b>3D-Objekte</b> <em>4 651</em></span><span><b>Videos</b> <em>4 184</em></span><span><b>Audio</b> <em>87</em></span><span><b>Mit IIIF-Manifest</b> <em>1 796 631</em></span><span><b>Hochformat</b> <em>1 735 989</em></span><span><b>Querformat</b> <em>710 855</em></span><span><b>CC0</b> <em>330 229</em></span><span><b>Public Domain</b> <em>436 173</em></span><span><b>CC BY</b> <em>298 757</em></span><span><b>Buch</b> <em>565 473</em></span><span><b>Fotografie</b> <em>145 818</em></span><span><b>Braun</b> <em>1 043 201</em></span><span><b>Violett</b> <em>911</em></span><span><b>Bilder</b> <em>1 440 909</em></span><span><b>Texte</b> <em>1 173 956</em></span><span><b>3D-Objekte</b> <em>4 651</em></span><span><b>Videos</b> <em>4 184</em></span><span><b>Audio</b> <em>87</em></span><span><b>Mit IIIF-Manifest</b> <em>1 796 631</em></span><span><b>Hochformat</b> <em>1 735 989</em></span><span><b>Querformat</b> <em>710 855</em></span><span><b>CC0</b> <em>330 229</em></span><span><b>Public Domain</b> <em>436 173</em></span><span><b>CC BY</b> <em>298 757</em></span><span><b>Buch</b> <em>565 473</em></span><span><b>Fotografie</b> <em>145 818</em></span><span><b>Braun</b> <em>1 043 201</em></span><span><b>Violett</b> <em>911</em></span></div></div>
     </div>
   </section>
 
@@ -163,9 +175,16 @@
 
       <p class="statement" data-split>Zwei Tage lang treffen österreichische Kulturdaten auf offene Wissensgraphen. Im Fokus: <em class="hl hl--cyan">Linked Open Data</em> und <em class="hl hl--magenta">Ähnlichkeitssuche</em>.</p>
 
-      <div class="event__text prose">
+      <div class="duo">
+        <div class="event__text prose">
         <p>Ein Hackathon von <a href="https://kulturpool.at">Kulturpool</a> und dem <a href="https://www.oeaw.ac.at/acdh/">Austrian Centre for Digital Humanities</a> der ÖAW, gefördert von CLARIAH-AT. In zwei Tagen entstehen funktionierende Prototypen auf Basis offener Kulturdaten.</p>
         <p>Am Ende stehen ein Projekt-Slam und Code unter freier Lizenz auf GitHub.</p>
+        </div>
+        <figure class="win win--tilt-r" data-window style="--win-accent: var(--violet)">
+          <div class="win__bar"><span class="win__close" aria-hidden="true"></span><span class="win__title">TITEL.MOV</span><span class="win__zoom" aria-hidden="true"></span></div>
+          <div class="win__body"><video muted loop playsinline preload="none" poster="media/title-sequence.jpg" data-src="media/title-sequence.mp4" aria-label="Ausschnitt aus Hackers (1995), ohne Ton"></video></div>
+          <figcaption class="win__status"><span data-tc>00:04:14</span><span>Hackers, 1995</span><button type="button" class="win__btn" data-play>Pause</button></figcaption>
+        </figure>
       </div>
 
       <dl class="specs">
@@ -175,7 +194,7 @@
         <div class="spec"><dt class="led">1</dt><dd><b>Bühne</b>Das Gewinner:innen-Team präsentiert beim Provider Forum am 3. November</dd></div>
       </dl>
 
-      <div class="crowd">
+      <div class="crowd" id="fuer-wen">
         <h3 class="kicker">Für wen</h3>
         <p class="crowd__list">
           <span>Entwickler:innen mit Semantic-Web-Interesse</span>
@@ -187,7 +206,7 @@
         <p class="crowd__note">Einzeln oder als Gruppe. Eine konkrete Idee ist willkommen, aber kein Muss.</p>
       </div>
 
-      <div class="kit">
+      <div class="kit" id="bereit">
         <h3 class="kicker">Was bereitsteht</h3>
         <ul class="kit__list">
           <li><b>Such- &amp; Objekt-API</b><span>Millionen Kulturobjekte, ohne Key</span></li>
@@ -200,20 +219,11 @@
     </div>
   </section>
 
-  <!-- ============ FILMSTREIFEN ============ -->
-  <div class="reel" aria-label="Filmausschnitte aus Hackers (1995)" role="group">
-    <div class="reel__strip" data-reel>
-      <figure class="frame"><video muted loop playsinline preload="none" poster="media/title-sequence.jpg" data-src="media/title-sequence.mp4"></video><figcaption>00:04:14</figcaption></figure>
-      <figure class="frame"><video muted loop playsinline preload="none" poster="media/pool-on-the-roof.jpg" data-src="media/pool-on-the-roof.mp4"></video><figcaption>00:12:26</figcaption></figure>
-      <figure class="frame"><video muted loop playsinline preload="none" poster="media/pool-has-a-leak.jpg" data-src="media/pool-has-a-leak.mp4"></video><figcaption>00:19:42</figcaption></figure>
-      <figure class="frame"><video muted loop playsinline preload="none" poster="media/gibson-green.jpg" data-src="media/gibson-green.mp4"></video><figcaption>00:26:00</figcaption></figure>
-      <figure class="frame"><video muted loop playsinline preload="none" poster="media/gibson.jpg" data-src="media/gibson.mp4"></video><figcaption>00:29:06</figcaption></figure>
-      <figure class="frame"><video muted loop playsinline preload="none" poster="media/hack-the-planet.jpg" data-src="media/hack-the-planet.mp4"></video><figcaption>01:33:24</figcaption></figure>
-    </div>
-    <div class="band" aria-hidden="true"><div class="band__track" data-band>
+  <!-- ============ BAND ============ -->
+  <div class="bandwrap" aria-hidden="true">
+    <div class="band"><div class="band__track" data-band>
       <span>Hack the Pool</span><svg class="band__sym"><use href="#smiley"/></svg><span>27.–28. Oktober 2026</span><svg class="band__sym"><use href="#smiley"/></svg><span>ÖAW Wien</span><svg class="band__sym"><use href="#smiley"/></svg>
     </div></div>
-    <p class="reel__credit">Hackers, 1995</p>
   </div>
 
   <!-- ============ POOL ============ -->
@@ -228,13 +238,21 @@
       </div>
 
       <dl class="tiles">
-        <div class="tile"><dt>Datengeber</dt><dd class="led" data-kpi="providers">175</dd></div>
+        <div class="tile"><dt>Partnerinstitutionen</dt><dd class="led" data-kpi="providers">175</dd></div>
         <div class="tile"><dt>Frei nachnutzbar</dt><dd class="led" data-kpi="open">766 402</dd><p class="tile__note">Reuse Policy „open“</p></div>
         <div class="tile"><dt>Mit IIIF-Manifest</dt><dd class="led" data-kpi="iiif">1 796 631</dd></div>
         <div class="tile"><dt>3D-Objekte</dt><dd class="led" data-kpi="3d">4 651</dd></div>
       </dl>
 
-      <div class="chart chart--time" data-chart="time">
+      <div class="scatter scatter--right">
+        <figure class="win win--tilt-l" data-window style="--win-accent: var(--magenta)">
+          <div class="win__bar"><span class="win__close" aria-hidden="true"></span><span class="win__title">MAINFRAME.MOV</span><span class="win__zoom" aria-hidden="true"></span></div>
+          <div class="win__body"><video muted loop playsinline preload="none" poster="media/mainframe-towers.jpg" data-src="media/mainframe-towers.mp4" aria-label="Ausschnitt aus Hackers (1995), ohne Ton"></video></div>
+          <figcaption class="win__status"><span data-tc>01:29:43</span><span>Hackers, 1995</span><button type="button" class="win__btn" data-play>Pause</button></figcaption>
+        </figure>
+      </div>
+
+      <div class="chart chart--time" data-chart="time" id="zeitstrahl">
         <div class="chart__head">
           <h3 class="chart__title">Objekte nach Jahrhundert</h3>
           <p class="chart__sub">Nach frühester Datierung. <span data-dated>1.858.861</span> Objekte sind datiert.</p>
@@ -246,20 +264,28 @@
         </details>
       </div>
 
-      <div class="chart chart--colors" data-chart="colors">
+      <div class="chart chart--colors" data-chart="colors" id="bildfarben">
         <div class="chart__head">
           <h3 class="chart__title">Bildfarben</h3>
-          <p class="chart__sub">Dominante Farbe der Abbildungen. Bunt sind nur <span data-colorful>2,0 %</span>.</p>
+          <p class="chart__sub">Dominante Farbe der Abbildungen</p>
         </div>
         <div class="strip" data-strip="all"></div>
-        <p class="strip__label">Die bunten <span data-colorful-short>2 %</span>, vergrößert</p>
+        <p class="strip__label">Bunte Farben, vergrößert</p>
         <div class="strip strip--zoom" data-strip="colorful"></div>
         <ul class="swatches" data-swatches></ul>
       </div>
 
-      <div class="chart chart--providers">
+      <div class="scatter scatter--left">
+        <figure class="win win--tilt-r" data-window style="--win-accent: var(--cyan)">
+          <div class="win__bar"><span class="win__close" aria-hidden="true"></span><span class="win__title">DATENWOLKE.MOV</span><span class="win__zoom" aria-hidden="true"></span></div>
+          <div class="win__body"><video muted loop playsinline preload="none" poster="media/mainframe-cloud.jpg" data-src="media/mainframe-cloud.mp4" aria-label="Ausschnitt aus Hackers (1995), ohne Ton"></video></div>
+          <figcaption class="win__status"><span data-tc>01:30:20</span><span>Hackers, 1995</span><button type="button" class="win__btn" data-play>Pause</button></figcaption>
+        </figure>
+      </div>
+
+      <div class="chart chart--providers" id="partner">
         <div class="chart__head">
-          <h3 class="chart__title">Größte Datengeber</h3>
+          <h3 class="chart__title">Größte Partnerinstitutionen</h3>
           <p class="chart__sub">Objekte je Institution</p>
         </div>
         <ol class="providers" data-providers>
@@ -276,7 +302,14 @@
   <section class="sec quests" id="quests" data-sec="Quests">
     <div class="wrap">
       <h2 class="sec__title" data-stretch><span data-scramble>Quests</span></h2>
-      <p class="lede">Fünf Themen als Startpunkt: eine wählen, mehrere kombinieren oder Eigenes mitbringen. LLM-Unterstützung ist überall erlaubt, Token-Kontingente stehen bereit.</p>
+      <div class="duo duo--quests">
+        <figure class="win win--tilt-l" data-window style="--win-accent: var(--cyan)">
+          <div class="win__bar"><span class="win__close" aria-hidden="true"></span><span class="win__title">GIBSON.MOV</span><span class="win__zoom" aria-hidden="true"></span></div>
+          <div class="win__body"><video muted loop playsinline preload="none" poster="media/gibson.jpg" data-src="media/gibson.mp4" aria-label="Ausschnitt aus Hackers (1995), ohne Ton"></video></div>
+          <figcaption class="win__status"><span data-tc>00:29:06</span><span>Hackers, 1995</span><button type="button" class="win__btn" data-play>Pause</button></figcaption>
+        </figure>
+        <p class="lede">Fünf Themen als Startpunkt: eine wählen, mehrere kombinieren oder Eigenes mitbringen. LLM-Unterstützung ist überall erlaubt, Token-Kontingente stehen bereit.</p>
+      </div>
     </div>
 
     <div class="quests__pin">
@@ -412,7 +445,7 @@
       </div>
 
       <div class="days">
-        <div class="day" data-day="2026-10-27">
+        <div class="day" data-day="2026-10-27" id="tag-1">
           <h3 class="day__name"><span class="led">Di 27</span><span>Oktober · Tag 1</span></h3>
           <div class="day__bar" aria-hidden="true"></div>
           <ol class="slots">
@@ -425,7 +458,7 @@
             <li data-t="22:00"><time>22:00</time><span>Location schließt</span></li>
           </ol>
         </div>
-        <div class="day" data-day="2026-10-28">
+        <div class="day" data-day="2026-10-28" id="tag-2">
           <h3 class="day__name"><span class="led">Mi 28</span><span>Oktober · Tag 2</span></h3>
           <div class="day__bar" aria-hidden="true"></div>
           <ol class="slots">
@@ -443,6 +476,14 @@
         <p><b>Zwischenstand</b> am ersten Abend, drei Fragen pro Team: Was ist unser Ziel? Was haben wir geschafft? Wo brauchen wir Hilfe?</p>
         <p><b>World-Café</b> Tischinseln im Hauptraum, Breakout-Räume für Teams, die Ruhe brauchen. Tutor:innen sind an beiden Tagen vor Ort.</p>
       </div>
+
+      <div class="scatter scatter--right">
+        <figure class="win win--tilt-r" data-window style="--win-accent: var(--acid)">
+          <div class="win__bar"><span class="win__close" aria-hidden="true"></span><span class="win__title">POOL.MOV</span><span class="win__zoom" aria-hidden="true"></span></div>
+          <div class="win__body"><video muted loop playsinline preload="none" poster="media/pool-on-the-roof.jpg" data-src="media/pool-on-the-roof.mp4" aria-label="Ausschnitt aus Hackers (1995), ohne Ton"></video></div>
+          <figcaption class="win__status"><span data-tc>00:12:26</span><span>Hackers, 1995</span><button type="button" class="win__btn" data-play>Pause</button></figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -452,7 +493,7 @@
       <h2 class="sec__title" data-stretch><span data-scramble>Daten &amp; APIs</span></h2>
       <p class="lede">Kein API-Key, keine Rate Limits.</p>
 
-      <div class="panel panel--search">
+      <div class="panel panel--search" id="live-suche">
         <div class="panel__head"><span>Live-Suche</span><code>GET api.kulturpool.at/v2/search</code></div>
         <div class="console">
           <form class="console__form" role="search" data-search>
@@ -471,7 +512,7 @@
         </div>
       </div>
 
-      <ul class="res">
+      <ul class="res" id="ressourcen">
         <li class="res__row">
           <h3 class="res__name">Kulturpool API</h3>
           <p class="res__url"><a href="https://api.kulturpool.at/reference/">api.kulturpool.at/reference</a><span class="status" data-ping="api"><i></i><span>prüfe…</span></span></p>
@@ -482,10 +523,15 @@
           <p class="res__url"><code>https://sparql.kulturpool.at/query</code><button class="copy" type="button" data-copy="https://sparql.kulturpool.at/query">kopieren</button><span class="status" data-ping="sparql"><i></i><span>prüfe…</span></span></p>
           <p class="res__txt">Europeana Data Model. Editor unter <a href="https://sparql.kulturpool.at/">sparql.kulturpool.at</a>.</p>
         </li>
-        <li class="res__row">
+        <li class="res__row res__row--win">
           <h3 class="res__name">Nightly Dumps</h3>
           <p class="res__url"><a href="https://s3.kpool.at/nightly/full_records.tar.gz">s3.kpool.at/nightly/full_records.tar.gz</a></p>
           <p class="res__txt">Vollabzug, täglich aktualisiert. Für alles, was lokal schneller geht als über die API.</p>
+          <figure class="win win--small win--tilt-l" data-window style="--win-accent: var(--magenta)">
+          <div class="win__bar"><span class="win__close" aria-hidden="true"></span><span class="win__title">LEAK.MOV</span><span class="win__zoom" aria-hidden="true"></span></div>
+          <div class="win__body"><video muted loop playsinline preload="none" poster="media/pool-has-a-leak.jpg" data-src="media/pool-has-a-leak.mp4" aria-label="Ausschnitt aus Hackers (1995), ohne Ton"></video></div>
+          <figcaption class="win__status"><span data-tc>00:19:42</span><span>Hackers, 1995</span><button type="button" class="win__btn" data-play>Pause</button></figcaption>
+        </figure>
         </li>
         <li class="res__row">
           <h3 class="res__name">Wikidata-Lookup</h3>
@@ -509,7 +555,7 @@
         </li>
       </ul>
 
-      <div class="query">
+      <div class="query" id="sparql">
         <figure class="panel panel--code">
           <div class="panel__head"><span>SPARQL</span><span class="panel__actions"><button class="copy" type="button" data-copy-code>kopieren</button><a class="copy" href="https://sparql.kulturpool.at/">Editor</a></span></div>
           <pre class="code" data-sparql><code>PREFIX edm: &lt;http://www.europeana.eu/schemas/edm/&gt;
@@ -525,6 +571,11 @@ ORDER BY DESC(?count)
 LIMIT 100</code></pre>
         </figure>
         <div class="query__side">
+          <figure class="win win--small win--tilt-r" data-window style="--win-accent: var(--violet)">
+          <div class="win__bar"><span class="win__close" aria-hidden="true"></span><span class="win__title">GARBAGE.MOV</span><span class="win__zoom" aria-hidden="true"></span></div>
+          <div class="win__body"><video muted loop playsinline preload="none" poster="media/mainframe-menu.jpg" data-src="media/mainframe-menu.mp4" aria-label="Ausschnitt aus Hackers (1995), ohne Ton"></video></div>
+          <figcaption class="win__status"><span data-tc>01:29:52</span><span>Hackers, 1995</span><button type="button" class="win__btn" data-play>Pause</button></figcaption>
+        </figure>
           <h3 class="kicker">Mehr Abfragen</h3>
           <p class="query__txt">Graph-Struktur, Datensets als Sub-Graphen, GND-Referenzen mit Wikidata verbinden, REST-Beispiele mit curl: gesammelt im Repo, Beiträge willkommen.</p>
           <p><a class="arrow-link" href="https://github.com/kulturpool/Hack-The-Pool-2026/blob/main/docs/05-queries.md">05 · Queries</a></p>
@@ -539,7 +590,7 @@ LIMIT 100</code></pre>
       <h2 class="sec__title" data-stretch><span data-scramble>Beispiele</span></h2>
       <p class="lede">Erste Beispiele des Kulturpool-Teams zeigen, wie die APIs funktionieren. Alle laufen direkt im Browser.</p>
 
-      <div class="disks">
+      <div class="disks" id="disketten">
         <a class="disk" href="../examples/closest_object/" style="--disk: var(--acid); --disk-tab: #0b0900">
           <svg class="floppy" viewBox="0 0 200 200" aria-hidden="true">
             <path d="M12 3h168l17 17v168a9 9 0 0 1-9 9H12a9 9 0 0 1-9-9V12a9 9 0 0 1 9-9Z" fill="var(--disk)"/>
@@ -591,7 +642,15 @@ LIMIT 100</code></pre>
         </a>
       </div>
 
-      <div class="archive">
+      <div class="scatter scatter--right">
+        <figure class="win win--tilt-l" data-window style="--win-accent: var(--cyan)">
+          <div class="win__bar"><span class="win__close" aria-hidden="true"></span><span class="win__title">GIBSON_2.MOV</span><span class="win__zoom" aria-hidden="true"></span></div>
+          <div class="win__body"><video muted loop playsinline preload="none" poster="media/gibson-green.jpg" data-src="media/gibson-green.mp4" aria-label="Ausschnitt aus Hackers (1995), ohne Ton"></video></div>
+          <figcaption class="win__status"><span data-tc>00:26:00</span><span>Hackers, 1995</span><button type="button" class="win__btn" data-play>Pause</button></figcaption>
+        </figure>
+      </div>
+
+      <div class="archive" id="vorjahr">
         <h3 class="kicker">Vorjahr · <a href="https://github.com/kulturpool/Hack-The-Pool-2025">Hack The Pool 2025</a></h3>
         <ol class="archive__list">
           <li><a href="https://kulturpool.github.io/Hack-The-Pool-2025/automated-summaries/"><span class="archive__path">automated-summaries</span><span class="archive__txt">KI-gestützte Kultursuche mit automatischen Zusammenfassungen</span></a></li>
@@ -648,6 +707,14 @@ LIMIT 100</code></pre>
       </div>
       <p class="finale__go"><a class="btn btn--acid btn--xl" href="https://umfrage.kulturpool.at/hack-the-pool-2026" data-reg-cta>Jetzt anmelden</a></p>
       <p class="finale__sub">Einzeln oder als Gruppe. Infos zur Veranstaltung auf <a href="https://info.kulturpool.at/hack-the-pool-2026/">info.kulturpool.at</a>.</p>
+
+      <div class="scatter scatter--center">
+        <figure class="win win--tilt-r" data-window style="--win-accent: var(--acid)">
+          <div class="win__bar"><span class="win__close" aria-hidden="true"></span><span class="win__title">HACK_THE_PLANET.MOV</span><span class="win__zoom" aria-hidden="true"></span></div>
+          <div class="win__body"><video muted loop playsinline preload="none" poster="media/hack-the-planet.jpg" data-src="media/hack-the-planet.mp4" aria-label="Ausschnitt aus Hackers (1995), ohne Ton"></video></div>
+          <figcaption class="win__status"><span data-tc>01:33:24</span><span>Hackers, 1995</span><button type="button" class="win__btn" data-play>Pause</button></figcaption>
+        </figure>
+      </div>
 
       <div class="contrib">
         <h3 class="kicker">Mitsammeln</h3>

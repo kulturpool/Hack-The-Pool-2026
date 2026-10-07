@@ -45,7 +45,7 @@
     stats: function () {
       return get(API + "/v2/search?" + qs({
         q: "*", per_page: 1, include_fields: "uuid", max_facet_values: 300,
-        facet_by: "dataProvider,edmType,imageColor,edmRightsReusePolicy,hasIiifManifest"
+        facet_by: "dataProvider,edmType,imageColor,edmRightsReusePolicy,hasIiifManifest,edmRightsName,imageOrientation,dcType"
       }), 15000);
     },
     // Objekte pro Jahrhundert, gezählt über Bereichsfilter auf dateMin (Unix-Sekunden)

@@ -12,7 +12,8 @@ Der Kulturpool wird zur Datenstadt aus *Hackers* (1995). Gläserne Türme tragen
   - Punktmatrix-Wortmarke
   - Quest-Pins
   - 3,5″-Disketten für die Beispiele
-  - Filmstreifen mit Ausschnitten
+  - Retro-Fenster mit Filmausschnitten in allen Bereichen
+  - Inhaltsfenster zum Herumschauen
   - die Innere Stadt als Platine
   - Pool-Licht im Finale
 - **Bewegung:** GSAP mit ScrollTrigger, SplitText, ScrambleText und DrawSVG. Wer im System „Bewegung reduzieren“ eingestellt hat, bekommt eine ruhige Seite ohne Dauerschleifen.
@@ -37,9 +38,10 @@ Testparameter:
 
 Alle Abfragen laufen im Browser direkt gegen `api.kulturpool.at` und `sparql.kulturpool.at`, ohne Key:
 
-- **Gesamtzahl, Datengeber, Lizenzen, IIIF, Medientypen, Bildfarben:** eine Facetten-Abfrage auf `/v2/search`
+- **Gesamtzahl, Partnerinstitutionen, Lizenzen, Formate, Objektarten, IIIF, Medientypen, Bildfarben:** eine Facetten-Abfrage auf `/v2/search`
 - **Objekte nach Jahrhundert:** zwölf Bereichsfilter auf `dateMin`
-- **Ticker und Stadt-Texturen:** Titel einer Zufallssuche
+- **Ticker:** Facettenzahlen aus derselben Abfrage
+- **Stadt-Texturen:** Titel einer Zufallssuche
 - **Live-Suche:** `/v2/search` und `/v2/similar?on=image`
 - **Status:** Ping auf API und SPARQL
 
@@ -58,7 +60,7 @@ js/pool.js        Client für die Kulturpool-API
 js/map-data.js    Straßen der Inneren Stadt (aus OpenStreetMap generiert)
 media/            Filmausschnitte (MP4, stumm) und Standbilder
 fonts/            Schriften (woff2) und OFL-Lizenzen
-vendor/gsap/      GSAP 3.15
+vendor/gsap/      GSAP 3.15 (inkl. Draggable)
 ```
 
 ## Quellen und Rechte
