@@ -9,7 +9,7 @@ Eine Uhr, zwei Tage. Die Zeiten sind der Rahmen — gearbeitet wird dazwischen.
 | **09:00** | Welcome | Arbeitsphase |
 | **09:10** | Themen, Quests & Beispiele | ↓ |
 | **10:00** | Team- & Ideenfindung | ↓ |
-| **12:00** | Arbeitsphase | ↓ |
+| **11:00** | Arbeitsphase | ↓ |
 | **13:00** | Mittagessen | Mittagessen |
 | **14:00** | Arbeitsphase | Letzter Schliff |
 | **14:30** | ↓ | **Projekt-Slam** |
